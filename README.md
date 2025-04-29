@@ -51,7 +51,7 @@ I plan to tackle this challenge with the following considerations:
 
 ## Endpoints
 
-[Example Data retured from the Endpoints](https://github.com/codecon-dev/desafio-1-1s-vs-3j/blob/main/exemplos-endpoints.json)
+[Example Data returned from the Endpoints](https://github.com/codecon-dev/desafio-1-1s-vs-3j/blob/main/exemplos-endpoints.json)
 
 
 ### 1 - `POST /users`
@@ -210,12 +210,12 @@ RETURN FORMAT:
 
 ### 6 - `GET /evaluation`
 
-- Must call endpoints 2 to 5 and logs their performance and result
+- Must call endpoints 2 to 5 and log their performance and results
 - Result must have the following data for each API called:
     - Endpoint called
-    - HTTP status code returned
-    - Time (ms) for the duration of the call
-    - isResultValid (boolean) if the result was a valid json
+    - status: HTTP status code returned
+    - time_ms: (ms) for the duration of the call
+    - valid_response: (boolean) if the result was a valid json
 
 <br>
 
