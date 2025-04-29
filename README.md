@@ -1,35 +1,71 @@
-# codecon1
-https://github.com/codecon-dev/desafio-1-1s-vs-3j?tab=readme-ov-file
+# codecon1 Challenge
 
-There is this video on Youtube, where they propose a battle between 3 junior and 1 senior developer.
-They have to import and parse a 100k registers json file and later, provide 6 endpoints to exibit
-this data in different formats and aggregations.
-Also, there are performance restrictions and 1 of those endpoints must act as an examiner of the other,
-providing statistics about the API, when called.
+There is a video on YouTube proposing a challenge: a battle between three junior developers and one senior developer.
+
+The task is to import and parse a JSON file containing 100,000 records and then provide six endpoints to display this data in different formats and aggregations.
+
+Additionally, there are performance constraints, and one of the endpoints must act as a monitor, providing statistics about the API when called.
 
 All of this must be done without AI and within 1 hour.
 
-I plan to tackle this challange with the following considerations:
+## Observations
 
-- I will allow myself to use google as much as needed. There is AI in the begining of the results, where I will skip (by scrolling fast)
-- I will try not to check my own code, but I might
-- I'm sure I wont do it in 1 hour.
+I plan to tackle this challenge with the following considerations:
 
-The plan:
+- I will allow myself to use Google as much as needed. Since AI-generated content appears at the beginning of the search results, I will skip over it (by scrolling quickly).
+- I will try not to check or revise my own code, but I might if necessary.
+- I am sure I won't complete it within 1 hour, but I will try to work quickly, focusing only on what is essential (e.g., I won't worry about SQL injection).
+- **Started**: 2025-04-28 21:45:00 (Found the video, started watching... then quickly stopped before seeing the solutions. I then began thinking about the challenge. The time reflects my estimated starting point.)
+- Not a good start: 2 hours just creating this readme  : )
 
-- Use Node for the API
-- SQL Lite for the data in memmory
+## Stack
 
+- Node for the API
+- SQLite (in-memory) for data storage
+- SQL for querying the data
+- Insomnia for testing
 
-The API:
+## Versions
 
-- 1 endpoint to recieve the JSON with the data
-- parse it all, saves in sql lite in memory
-- define api as ready
-- endpoints became available
+- Node.js 23.4.0
 
+## API Overview
 
+- Starts in `WAITING_DATA` mode.
+- 1 endpoint to receive the JSON data.
+- Saves the JSON to disk, parses all records, and stores them into an in-memory SQLite database.
+- Sets the API to `READY` mode.
+- All other endpoints become available.
+
+## Bonus Items 
+
+- NOT: Automated tests
+- NOT: Security
+- NOT: Swagger documentation
+- NOT: Great performance
+- NOT: Zod as middleware for validation
+- NOT: GitHub Actions integration and API publishing
+
+## Links
+
+- [YouTube Video](https://www.youtube.com/watch?v=AFtRYXJVO-4&t=669s)
+- [GitHub Repository](https://github.com/codecon-dev/desafio-1-1s-vs-3j?tab=readme-ov-file)
+
+## Test and Production Data
+
+Files containing test and full datasets are located in the `.\Other\json` folder.
+
+## Data Model
+
+Tables:
+- `USERS`
+- `PROJECTS`
+- `TEAMS`
+
+<br>
 The JSON register:
+<br><br>
+
 
 ```json
 {
@@ -48,7 +84,9 @@ The JSON register:
 }
 ```
 
-JSON Register Example:
+<br>
+
+JSON Register Example (kind of random):
 
 ```json
 {
@@ -97,9 +135,15 @@ JSON Register Example:
 }
 ```
 
+<br><br>
+-------------------------------
+<br><br>
+
 Fluxo criacao boilerplate:
+
 https://medium.com/@gabrieldrouin/node-js-2025-guide-how-to-setup-express-js-with-typescript-eslint-and-prettier-b342cd21c30d#2245
 
+0 - Copiar todos os arquivos dot (e outros) da raiz
 
 1 - Cria nvmrc
 node -v > .nvmrc
@@ -149,9 +193,13 @@ echo '' > src/utils/sum.ts
 echo '' > tsconfig.build.json
 echo '' > vitest.config.js
 
-
+<br><br>
+-------------------------------
+<br>
 
 Original text from the Challenge:
+
+<br>
 
 # Desafio Técnico: Performance e Análise de Dados via API
 
