@@ -8,15 +8,22 @@ Additionally, there are performance constraints, and one of the endpoints must a
 
 All of this must be done without AI and within 1 hour.
 
+## Links
+
+- [YouTube Video](https://www.youtube.com/watch?v=AFtRYXJVO-4&t=669s)
+- [Video GitHub Repository](https://github.com/codecon-dev/desafio-1-1s-vs-3j?tab=readme-ov-file)
+
+
 ## Observations
 
 I plan to tackle this challenge with the following considerations:
 
 - I will allow myself to use Google as much as needed. Since AI-generated content appears at the beginning of the search results, I will skip over it (by scrolling quickly).
-- I will try not to check or revise my own code, but I might if necessary.
+- I will try not to check or revise my own code, but I might if necessary. (I did. Just to check how I was doing routes)
 - I am sure I won't complete it within 1 hour, but I will try to work quickly, focusing only on what is essential (e.g., I won't worry about SQL injection).
-- **Started**: 2025-04-28 21:45:00 (Found the video, started watching... then quickly stopped before seeing the solutions. I then began thinking about the challenge. The time reflects my estimated starting point.)
-- Not a good start: 2 hours just creating this readme  : )
+- **Started**: `2025-04-28 21:45:00` (Found the video, started watching... then quickly stopped before seeing the solutions. I then began thinking about the challenge. The time reflects my estimated starting point.)
+- Not a good start: ~~2 hours~~ 3 hours just for creating this `readme` 😄
+
 
 ## Stack
 
@@ -35,22 +42,220 @@ I plan to tackle this challenge with the following considerations:
 - 1 endpoint to receive the JSON data.
 - Saves the JSON to disk, parses all records, and stores them into an in-memory SQLite database.
 - Sets the API to `READY` mode.
-- All other endpoints become available.
+- All other 5 endpoints become available.
 
-## Bonus Items 
 
-- NOT: Automated tests
-- NOT: Security
-- DONE: Project documentation
-- NOT: Swagger documentation
-- NOT: Great performance
-- NOT: Zod as middleware for validation
-- NOT: GitHub Actions integration and API publishing
+## How to build and test localy
+- TODO!!!!!!
 
-## Links
 
-- [YouTube Video](https://www.youtube.com/watch?v=AFtRYXJVO-4&t=669s)
-- [GitHub Repository](https://github.com/codecon-dev/desafio-1-1s-vs-3j?tab=readme-ov-file)
+## Endpoints
+
+[Example Data retured from the Endpoints](https://github.com/codecon-dev/desafio-1-1s-vs-3j/blob/main/exemplos-endpoints.json)
+
+
+### 1 - `POST /users`
+
+- Recieve the JSON with the data and sets API to `READY`, after parsing
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "body": {
+            "timestamp": "string",
+            "execution_time_ms": "int",
+            "message": "string",
+            "user_count": "int"         
+        }
+    }
+}
+```
+
+<br>
+
+### For the following endpoints, the API must be in `READY` mode: 
+<br>
+
+### 2 - `GET /superusers`
+
+- Filter: `score >= 900` and `active = true`
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "body": {
+            "timestamp": "string",
+            "execution_time_ms": "int",
+            "data": [
+                {
+                    "id": "string",
+                    "name": "string",
+                    "score": "int",
+                    "active": "boolean"
+                }
+            ]            
+        }
+    }
+}
+```
+
+<br>
+
+### 3 - `GET /top-countries`
+
+- Get the top 5 countries with most number of superusers
+
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "body": {
+            "timestamp": "string",
+            "execution_time_ms": "int",
+            "countries": [
+                {
+                    "country": "string",
+                    "total": "int"
+                }
+            ]            
+        }
+    }
+}
+```
+
+<br>
+
+### 4 - `GET /team-insights`
+
+- Group by `team.name`
+- Returns: total members, leaders, completed projects and the % of active members
+
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "body": {
+            "timestamp": "string",
+            "execution_time_ms": "int",
+            "teams": [
+                {
+                    "team": "string",
+                    "total_members": "int",
+                    "leaders": "int",
+                    "completed_projects": "int",
+                    "active_percentage": "float"
+                }
+            ]            
+        }
+    }
+}
+```
+
+<br>
+
+### 5 - `GET /active-users-per-day`
+
+- Count how many logins happened in a given date
+- Optional param: `?min=3000` to filter for dates with at least 3000 logins (example)
+
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "body": {
+            "timestamp": "string",
+            "execution_time_ms": "int",
+            "logins": [
+                {
+                    "date": "string",
+                    "total": "string"
+                }
+            ]            
+        }
+    }
+}
+```
+
+<br>
+
+### 6 - `GET /evaluation`
+
+- Must call endpoints 2 to 5 and logs their performance and result
+- Result must have the following data for each API called:
+    - Endpoint called
+    - HTTP status code returned
+    - Time (ms) for the duration of the call
+    - isResultValid (boolean) if the result was a valid json
+
+<br>
+
+RETURN FORMAT:
+
+```json
+{
+    "descricao": "string",
+    "response": {
+        "status": "int",
+        "time_ms": "int",
+        "body": {
+            "tested_endpoints": {
+                "/superusuarios": {
+                    "status": "int",
+                    "time_ms": "int",
+                    "valid_response": "boolean"                
+                },
+                "/ranking-paises": {
+                    "status": "int",
+                    "time_ms": "int",
+                    "valid_response": "boolean"                
+                },
+                "/analise-equipes": {
+                    "status": "int",
+                    "time_ms": "int",
+                    "valid_response": "boolean"                
+                },
+                "/usuarios-ativos-por-dia": {
+                    "status": "int",
+                    "time_ms": "int",
+                    "valid_response": "boolean"                
+                },
+            }
+        }
+    }
+}
+```
+
+
 
 <br>
 
@@ -180,6 +385,18 @@ JSON Register Example (kind of random):
     ]
 }
 ```
+
+
+
+## Bonus Items 
+
+- NOT: Automated tests
+- NOT: Security
+- DONE: Project documentation
+- NOT: Swagger documentation
+- NOT: Great performance
+- NOT: Zod as middleware for validation
+- NOT: GitHub Actions integration and API publishing
 
 <br><br>
 -------------------------------
