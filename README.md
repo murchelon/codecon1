@@ -51,16 +51,61 @@ I plan to tackle this challenge with the following considerations:
 - [YouTube Video](https://www.youtube.com/watch?v=AFtRYXJVO-4&t=669s)
 - [GitHub Repository](https://github.com/codecon-dev/desafio-1-1s-vs-3j?tab=readme-ov-file)
 
-## Test and Production Data
+<br>
+
+## Data Model 
+
+### Test and Production Data
 
 Files containing test and full datasets are located in the `.\Other\json` folder.
 
-## Data Model
 
-Tables:
+
+### Tables
 - `USERS`
-- `PROJECTS`
 - `TEAMS`
+- `PROJECTS`
+- `LOGS`
+
+### Table: USERS
+
+| Column        | Type     | Nullable | Description                      |
+|---------------|----------|----------|----------------------------------|
+| id            | TEXT     | NO (PK)  | Unique identifier (UUID)         |
+| name          | TEXT     | NO       | Name of the user                 |
+| age           | INTEGER  | YES      | Age of the user                  |
+| score         | INTEGER  | YES      | User's score                     |
+| active        | INTEGER  | NO       | Whether the user is active (0/1) |
+| country       | TEXT     | YES      | Country of the user              |
+
+### Table: TEAMS
+
+| Column        | Type     | Nullable | Description                      |
+|---------------|----------|----------|----------------------------------|
+| id            | INTEGER  | NO (PK)  | Primary key (auto-increment)     |
+| user_id       | TEXT     | NO       | Foreign key to users(id)         |
+| name          | TEXT     | NO       | Team name                       |
+| leader        | INTEGER  | NO       | Whether the user is a leader (0/1) |
+
+### Table: PROJECTS
+
+| Column        | Type     | Nullable | Description                      |
+|---------------|----------|----------|----------------------------------|
+| id            | INTEGER  | NO (PK)  | Primary key (auto-increment)     |
+| team_id       | INTEGER  | NO       | Foreign key to teams(id)         |
+| name          | TEXT     | NO       | Project name                    |
+| completed     | INTEGER  | NO       | Whether the project is completed (0/1) |
+
+### Table: LOGS
+
+| Column        | Type     | Nullable | Description                      |
+|---------------|----------|----------|----------------------------------|
+| id            | INTEGER  | NO (PK)  | Primary key (auto-increment)     |
+| user_id       | TEXT     | NO       | Foreign key to users(id)         |
+| date          | TEXT     | NO       | Log date (format: YYYY-MM-DD)    |
+| action        | TEXT     | NO       | Action performed (login/logout)  |
+
+
 
 <br>
 The JSON register:
