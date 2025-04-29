@@ -393,6 +393,7 @@ JSON Register Example (kind of random):
 - NOT: Automated tests
 - NOT: Security
 - DONE: Project documentation
+- DONE: Follow the exact specification
 - NOT: Swagger documentation
 - NOT: Great performance
 - NOT: Zod as middleware for validation
